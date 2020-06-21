@@ -1,3 +1,8 @@
+![](https://img.shields.io/badge/build-springboot-brightgreen) 
+![](https://img.shields.io/badge/build-shiro-brightgreen)
+![](https://img.shields.io/badge/build-JWT-blue)
+
+
 ## 概述
 
 如果想要直接体验，直接 `clone` 项目，由于是`springboot`项目而且并没有和`DB`做交互，所以可以直接启动，借助postman进行体验`shiro`对权限的控制。
