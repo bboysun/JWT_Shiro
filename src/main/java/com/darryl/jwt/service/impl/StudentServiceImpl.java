@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
  * @Date: 2020/07/05
  */
 @Service
-@LogEnable // 启动日志拦截
-@LogEvent(module = ModuleType.STUDENT)
+@LogEnable() // 启动日志拦截
+//@LogEvent(module = ModuleType.STUDENT)
 public class StudentServiceImpl implements IStudentService {
 	@Override
 	@LogEvent(event = EventType.DELETE_SINGLE, desc = "删除记录") // 添加日志标识
