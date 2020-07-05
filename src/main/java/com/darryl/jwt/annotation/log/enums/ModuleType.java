@@ -9,7 +9,7 @@ public enum ModuleType {
 
 	DEFAULT("1"), // 默认值
 	STUDENT("2"), // 学生模块
-	TEACHER("3"); // 用户模块
+	USER("3"); // 用户模块
 
 	ModuleType(String index){
 		this.module = index;

@@ -1,5 +1,8 @@
 package com.darryl.jwt.service;
 
+import com.darryl.jwt.annotation.log.annotation.LogEnable;
+import com.darryl.jwt.annotation.log.annotation.LogEvent;
+import com.darryl.jwt.annotation.log.enums.ModuleType;
 import com.darryl.jwt.model.UserBean;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +15,7 @@ import java.util.Map;
  */
 @Component
 public class UserService {
+
 	public UserBean getUser(String username) {
 		// 没有此用户直接返回null
 		if (! DataSource.getData().containsKey(username))
