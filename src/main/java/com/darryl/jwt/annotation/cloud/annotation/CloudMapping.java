@@ -1,7 +1,7 @@
-package com.darryl.jwt.annotation.http.annotation;
+package com.darryl.jwt.annotation.cloud.annotation;
 
-import com.darryl.jwt.annotation.http.enums.Protocol;
-import com.darryl.jwt.annotation.http.enums.SerializeMethod;
+import com.darryl.jwt.annotation.cloud.enums.Protocol;
+import com.darryl.jwt.annotation.cloud.enums.SerializeMethod;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.lang.annotation.*;

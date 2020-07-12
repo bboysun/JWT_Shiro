@@ -1,4 +1,4 @@
-package com.darryl.jwt.annotation.http.annotation;
+package com.darryl.jwt.annotation.cloud.annotation;
 
 import java.lang.annotation.*;
 

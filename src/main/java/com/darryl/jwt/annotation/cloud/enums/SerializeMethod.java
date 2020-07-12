@@ -1,4 +1,4 @@
-package com.darryl.jwt.annotation.http.enums;
+package com.darryl.jwt.annotation.cloud.enums;
 
 /**
  * @Auther: Darryl
