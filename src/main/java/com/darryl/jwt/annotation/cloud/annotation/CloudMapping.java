@@ -26,5 +26,5 @@ public @interface CloudMapping {
 	Protocol protocol() default Protocol.HTTP;
 
 	// serialize method
-	SerializeMethod serializeMethod() default SerializeMethod.JSON;
+	SerializeMethod response() default SerializeMethod.JSON;
 }
