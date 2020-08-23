@@ -4,7 +4,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 /**
  * @Auther: Darryl
- * @Description:
+ * @Description: cloud factory bean
  * @Date: 2020/07/19
  */
 public class CloudFactoryBean<T> implements FactoryBean<T> {

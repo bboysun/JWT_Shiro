@@ -10,7 +10,6 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -44,12 +43,5 @@ public class CloudRegister implements BeanDefinitionRegistryPostProcessor {
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
 		// nothing to do
-	}
-
-	public static void main(String[] args) {
-		String[] strings = StringUtils.tokenizeToStringArray(BASE_PACKAGE, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
-		for (String str : strings) {
-			System.out.println(str);
-		}
 	}
 }
