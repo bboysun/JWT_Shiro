@@ -91,6 +91,10 @@ public class CloudHttpClient {
 		return url;
 	}
 
+	public static void initSerializers(Map<SerializeMethod, CloudSerializer> serializerMap) {
+		CloudHttpClient.serializers = serializerMap;
+	}
+
 	interface HttpCloud {
 		Object doExecute(Protocol protocol, CloudMethod method, String url, Object... args);
 	}

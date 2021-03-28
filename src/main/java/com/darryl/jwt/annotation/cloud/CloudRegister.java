@@ -1,5 +1,6 @@
 package com.darryl.jwt.annotation.cloud;
 
+import com.darryl.jwt.annotation.cloud.annotation.Cloud;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -28,7 +29,8 @@ public class CloudRegister implements BeanDefinitionRegistryPostProcessor {
 
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) throws BeansException {
-		Set<BeanDefinitionHolder> beanDefinitionHolders = new CloudScanner(beanDefinitionRegistry).scanPackage(StringUtils.tokenizeToStringArray(BASE_PACKAGE,
+		Set<BeanDefinitionHolder> beanDefinitionHolders = new CloudScanner(beanDefinitionRegistry, Cloud.class)
+				.scanPackage(StringUtils.tokenizeToStringArray(BASE_PACKAGE,
 				ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS));
 		if (CollectionUtils.isEmpty(beanDefinitionHolders)) {
 			log.error("no beanDefinition found in {}", BASE_PACKAGE);
