@@ -36,6 +36,11 @@ public class CloudFactoryBean<T> implements FactoryBean<T> {
 		return null;
 	}
 
+	@Override
+	public boolean isSingleton() {
+		return true;
+	}
+
 	public void setInterfaceName(String interfaceName) {
 		this.interfaceName = interfaceName;
 	}

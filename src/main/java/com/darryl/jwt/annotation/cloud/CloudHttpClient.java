@@ -6,6 +6,7 @@ import com.darryl.jwt.annotation.cloud.utils.CloudHttpClientUtils;
 import com.darryl.jwt.annotation.cloud.serializers.CloudSerializer;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -42,6 +43,25 @@ public class CloudHttpClient {
 				}
 				CloudSerializer cloudResponseSerializer = serializers.get(method.getResponseSerializeMethod());
 				return cloudResponseSerializer.desrialize(method.getReturnType(), response);
+			}
+		});
+		httpCloudMap.put(RequestMethod.POST, new HttpCloud() {
+			@Override
+			public Object doExecute(Protocol protocol, CloudMethod method, String url, Object... args) {
+				CloudSerializer postSerializer = serializers.get(method.getPostSerializeMethod());
+				List<Object> argsList = Lists.newArrayList();
+				argsList.addAll(Arrays.asList(args));
+				url = buildPathParam(url, method.getPathParameters(), argsList);
+				Map<String, Object> keyValueParams = buildParam(method.getParameters(), argsList);
+				String postParam = buildPostParam(postSerializer, args);
+				String response = CloudHttpClientUtils.post(protocol, url, keyValueParams, postParam,
+						postSerializer == null ? ContentType.APPLICATION_FORM_URLENCODED.toString() :
+								postSerializer.contentType());
+				if (String.class.equals(method.getReturnType())) {
+					return response;
+				}
+				CloudSerializer serializer = serializers.get(method.getResponseSerializeMethod());
+				return serializer.desrialize(method.getReturnType(), response);
 			}
 		});
 	}
@@ -89,6 +109,10 @@ public class CloudHttpClient {
 			}
 		}
 		return url;
+	}
+
+	public static Object execute(Protocol protocol, CloudMethod cloudMethod, String url, Object... args) {
+		return httpCloudMap.get(cloudMethod.getRequestMethod()).doExecute(protocol, cloudMethod, url, args);
 	}
 
 	public static void initSerializers(Map<SerializeMethod, CloudSerializer> serializerMap) {
