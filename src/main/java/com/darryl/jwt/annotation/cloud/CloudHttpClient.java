@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.*;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @Auther: Darryl
  * @Description: http client wrapper
@@ -112,7 +114,9 @@ public class CloudHttpClient {
 	}
 
 	public static Object execute(Protocol protocol, CloudMethod cloudMethod, String url, Object... args) {
-		return httpCloudMap.get(cloudMethod.getRequestMethod()).doExecute(protocol, cloudMethod, url, args);
+		return httpCloudMap.get(checkNotNull(cloudMethod).getRequestMethod())
+				.doExecute(checkNotNull(protocol), cloudMethod, checkNotNull(url),
+				args);
 	}
 
 	public static void initSerializers(Map<SerializeMethod, CloudSerializer> serializerMap) {
