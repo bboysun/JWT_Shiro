@@ -2,6 +2,7 @@ package com.darryl.jwt.annotation.cloud;
 
 import com.darryl.jwt.annotation.cloud.annotation.Cloud;
 import com.darryl.jwt.annotation.cloud.annotation.CloudMapping;
+import com.darryl.jwt.annotation.cloud.enums.Protocol;
 import com.darryl.jwt.annotation.cloud.enums.SerializeMethod;
 import com.darryl.jwt.annotation.cloud.utils.LazyMap;
 
@@ -49,7 +50,9 @@ public class CloudProxy implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		//Cloud proxyCloud = (Cloud) checkNotNull()
+		Cloud proxyCloud = (Cloud) checkNotNull(classAnnotations.get(CLOUD_NAME));
+		CloudMethod cloudMethod = cloudMethodMap.get(method);
+		Protocol cloudProtocol = cloudMethod.getMethodMapping().protocol();
 		return null;
 	}
 

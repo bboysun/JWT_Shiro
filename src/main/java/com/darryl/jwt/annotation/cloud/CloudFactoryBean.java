@@ -20,12 +20,23 @@ public class CloudFactoryBean<T> implements FactoryBean<T> {
 	@Override
 	public T getObject() throws Exception {
 		Class clazz = Class.forName(interfaceName);
-		//return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, new Cl);
-		return null;
+		return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, new CloudProxy(clazz.getAnnotations()));
 	}
 
 	@Override
 	public Class<?> getObjectType() {
+		if (interfaceName == null) {
+			return null;
+		}
+		try {
+			return (Class<T>) Class.forName(interfaceName);
+		} catch (ClassNotFoundException e) {
+			log.error("class not found:{}", interfaceName, e);
+		}
 		return null;
+	}
+
+	public void setInterfaceName(String interfaceName) {
+		this.interfaceName = interfaceName;
 	}
 }

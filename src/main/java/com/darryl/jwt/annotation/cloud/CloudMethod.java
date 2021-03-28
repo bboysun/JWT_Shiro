@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: Darryl
@@ -25,9 +26,10 @@ public class CloudMethod {
 	private final RequestMethod requestMethod;
 	private final SerializeMethod responseSerializeMethod;
 	private final Type returnType;
+	private final Map<String, Integer> pathParameters;
 
 	public CloudMethod(String methodName, List<String> parameters, SerializeMethod postSerializeMethod, CloudMapping methodMapping
-			, RequestMethod requestMethod, SerializeMethod responseSerializeMethod, Type returnType) {
+			, RequestMethod requestMethod, SerializeMethod responseSerializeMethod, Type returnType, Map<String, Integer> pathParameters) {
 		this.methodName = methodName;
 		this.parameters = parameters;
 		this.postSerializeMethod = postSerializeMethod;
@@ -35,5 +37,6 @@ public class CloudMethod {
 		this.requestMethod = requestMethod;
 		this.responseSerializeMethod = responseSerializeMethod;
 		this.returnType = returnType;
+		this.pathParameters = pathParameters;
 	}
 }
