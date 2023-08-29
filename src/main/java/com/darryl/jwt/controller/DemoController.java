@@ -1,9 +1,11 @@
 package com.darryl.jwt.controller;
 
+import com.darryl.jwt.license.LicenseCheckInterceptor;
 import com.darryl.jwt.model.ResponseResult;
 import com.darryl.jwt.model.UserBean;
 import com.darryl.jwt.service.UserService;
 import com.darryl.jwt.utils.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -24,10 +26,13 @@ import javax.servlet.http.HttpServletRequest;
  * @Date: 2020/06/21
  */
 @RestController
+@Slf4j
 public class DemoController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private LicenseCheckInterceptor licenseCheckInterceptor;
 
 	/**
 	 * 登录入口
@@ -37,6 +42,10 @@ public class DemoController {
 	 */
 	@PostMapping(value = "/login")
 	public ResponseEntity<ResponseResult> login (String username, String password) {
+		Boolean licenseCheckRes = licenseCheckInterceptor.getLicenseCheckRes();
+
+		log.info("license check res is {}", licenseCheckRes);
+
 		UserBean user = userService.getUser(username);
 		ResponseResult responseResult = new ResponseResult();
 
