@@ -1,5 +1,7 @@
 package com.darryl.jwt.license;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +10,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
 /**
  * @Auther: Darryl
@@ -15,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/08/29
  */
 @Component
-public class LicenseCheckInterceptor {
+public class LicenseCheckInterceptor implements AsyncHandlerInterceptor {
 
 	private LicenseCheckTask task = new LicenseCheckTask("darrylsun_test");
 
@@ -32,4 +35,9 @@ public class LicenseCheckInterceptor {
 		return task.getCheckRes();
 	}
 
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		return task.getCheckRes();
+	}
 }
